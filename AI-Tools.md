@@ -59,3 +59,22 @@ Avantages principaux :
 
 Reference future :
 Claw Code = framework open source d'agent de code IA + CLI Rust + architecture type Claude Code.
+
+## ClawBot Cloud
+
+URL : https://cloud.clawbot.ai/?utm_source=clawcodes
+
+Resume en 3 lignes :
+ClawBot Cloud est une plateforme cloud pour deployer un agent OpenClaw sans maintenance locale.
+L'agent est annonce comme disponible 24/7 et accessible depuis des plateformes de chat.
+Le site propose un assistant de configuration avec choix automatique du modele, connexion d'un canal et deploiement.
+
+Avantages principaux :
+- Pas d'installation locale lourde.
+- Agent cloud toujours en ligne.
+- Configuration guidee en 3 etapes.
+- Modeles integres : Claude, GPT, Gemini, Grok, Kimi, Qwen et autres.
+- Utile pour tester OpenClaw rapidement sans gerer serveur, uptime ou maintenance.
+
+Reference future :
+ClawBot Cloud = version hebergee d'agent OpenClaw + 24/7 + zero maintenance locale.
