@@ -38,3 +38,24 @@ Avantages principaux :
 
 Reference future :
 Parallel Code = orchestration multi-agents IA + worktrees Git + comparaison de solutions.
+
+## Claw Code
+
+URL repo officiel : https://github.com/instructkr/claw-code
+URL repo actuel : https://github.com/ultraworkers/claw-code
+Site : https://claw-code.codes
+
+Resume en 3 lignes :
+Claw Code est un framework open source d'agent de code IA inspire de l'architecture Claude Code.
+Le projet utilise principalement Rust, avec un CLI `claw` a compiler depuis les sources.
+Il sert a tester, executer et structurer des workflows d'agent de code avec sessions, outils, permissions et MCP.
+
+Avantages principaux :
+- Open source et inspectable.
+- Base Rust orientee performance.
+- CLI local pour workflows d'agent de code.
+- Documentation dediee : architecture, outils, commandes, memoire, permissions et MCP.
+- Utile pour comprendre ou experimenter une architecture type Claude Code.
+
+Reference future :
+Claw Code = framework open source d'agent de code IA + CLI Rust + architecture type Claude Code.
