@@ -19,3 +19,22 @@ Avantages principaux :
 
 Reference future :
 MavKa = assistant IA Telegram + terminal + memoire + multi-fournisseurs IA.
+
+## Parallel Code
+
+URL : https://github.com/johannesjo/parallel-code
+
+Resume en 3 lignes :
+Parallel Code permet de lancer plusieurs agents de code IA en parallele sur une meme base de code.
+Il supporte Claude Code, Codex, Gemini et Copilot CLI.
+Chaque agent travaille dans son propre git worktree pour comparer les resultats sans melanger les modifications.
+
+Avantages principaux :
+- Test rapide de plusieurs agents IA sur la meme tache.
+- Isolation des changements avec git worktrees.
+- Comparaison facile des solutions produites.
+- Compatible avec plusieurs CLI IA populaires.
+- Utile pour prototypage, refactor, correction de bug et benchmark d'agents.
+
+Reference future :
+Parallel Code = orchestration multi-agents IA + worktrees Git + comparaison de solutions.
