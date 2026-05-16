@@ -78,3 +78,24 @@ Avantages principaux :
 
 Reference future :
 ClawBot Cloud = version hebergee d'agent OpenClaw + 24/7 + zero maintenance locale.
+
+## RTK - Rust Token Killer
+
+URL site : https://www.rtk-ai.app/
+URL repo : https://github.com/rtk-ai/rtk
+
+Resume en 3 lignes :
+RTK est un outil CLI open source en Rust qui compresse les sorties de commandes avant qu'elles entrent dans le contexte d'un agent IA.
+Il reduit le bruit des commandes comme git status, git diff, grep, find, ls, pytest, cargo test ou npm test.
+Il fonctionne avec Claude Code, Cursor, Aider, Gemini CLI, OpenAI Codex, Cline, Windsurf et GitHub Copilot.
+
+Avantages principaux :
+- Reduit fortement les tokens inutiles dans les sessions de coding IA.
+- Ameliore la qualite du contexte donne au modele.
+- Allonge les sessions avant saturation du contexte.
+- Peut reduire les couts API sur les workflows tres CLI.
+- Open source, MIT, local-first, sans compte ni cle API.
+- Installation simple via Homebrew, script curl, Cargo ou binaires precompiles.
+
+Reference future :
+RTK = compresseur de sorties terminal pour agents IA + economie de tokens + meilleur contexte.
