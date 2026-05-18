@@ -99,3 +99,194 @@ Avantages principaux :
 
 Reference future :
 RTK = compresseur de sorties terminal pour agents IA + economie de tokens + meilleur contexte.
+
+## CloakBrowser
+
+URL : https://github.com/CloakHQ/CloakBrowser
+
+Resume en 3 lignes :
+CloakBrowser est un Chromium modifie au niveau source pour automatisation web stealth.
+Il se presente comme remplacement Playwright/Puppeteer avec API proche et binaires auto-telecharges.
+Il vise les tests d'automatisation, fingerprinting, profils persistants et compatibilite agents IA/browser automation.
+
+Avantages principaux :
+- Remplacement rapide de Playwright/Puppeteer.
+- Patches Chromium source-level, pas seulement injection JS.
+- Support Python et JavaScript.
+- Profils persistants, proxy, timezone/locale.
+- Utile pour tests anti-bot defensifs et QA d'automatisation, a utiliser legalement.
+
+Reference future :
+CloakBrowser = Chromium stealth + Playwright/Puppeteer drop-in + tests anti-detection.
+
+## AiToEarn
+
+URL : https://github.com/yikart/AiToEarn
+
+Resume en 3 lignes :
+AiToEarn est une collection de ressources autour de l'usage de l'IA pour creer des revenus.
+Le repo sert surtout de repertoire d'idees, outils, workflows et opportunites IA.
+Il est utile comme veille business IA plus que comme outil technique unique.
+
+Avantages principaux :
+- Source d'inspiration pour monetisation IA.
+- Liste centralisee d'idees et ressources.
+- Utile pour veille marche et brainstorming.
+- Bon point de depart pour trouver des niches IA.
+- A verifier au cas par cas avant investissement de temps ou argent.
+
+Reference future :
+AiToEarn = repertoire d'idees pour gagner avec l'IA + veille opportunites.
+
+## agentmemory
+
+URL : https://github.com/rohitg00/agentmemory
+
+Resume en 3 lignes :
+agentmemory fournit une memoire persistante pour agents de code IA.
+L'objectif est de conserver contexte, decisions et preferences entre sessions.
+Le projet cible les agents coding et se base sur des benchmarks d'usage reel.
+
+Avantages principaux :
+- Memoire persistante entre sessions.
+- Meilleure continuite pour agents de code.
+- Peut reduire les repetitions de contexte.
+- Utile pour grands projets ou travail long.
+- Oriente benchmarks et comparaison pratique.
+
+Reference future :
+agentmemory = memoire persistante pour agents coding + contexte long terme.
+
+## UI-TARS Desktop
+
+URL : https://github.com/bytedance/UI-TARS-desktop
+
+Resume en 3 lignes :
+UI-TARS Desktop est une stack open source d'agent IA multimodal pour ordinateur.
+Elle relie modeles IA, perception d'interface et infrastructure agent pour agir sur des UI.
+Le projet vise les workflows desktop ou l'agent observe, raisonne et interagit avec l'ecran.
+
+Avantages principaux :
+- Agent multimodal open source.
+- Oriente controle d'interface graphique.
+- Utile pour automatisation desktop.
+- Base ByteDance, avec ambition stack complete.
+- Bon candidat pour experimenter agents visuels.
+
+Reference future :
+UI-TARS Desktop = agent multimodal desktop + vision UI + automatisation ecran.
+
+## 9Router
+
+URL : https://github.com/decolua/9router
+
+Resume en 3 lignes :
+9Router est un routeur local/API pour connecter outils de coding IA a de nombreux fournisseurs et modeles.
+Il supporte Claude Code, Codex, Cursor, Cline, Copilot, OpenClaw et autres via endpoint compatible.
+Il ajoute fallback automatique, suivi de quotas et economie de tokens via RTK.
+
+Avantages principaux :
+- Centralise plusieurs fournisseurs IA.
+- Fallback automatique si quota ou limite.
+- Compatible avec beaucoup de CLI coding.
+- Economie de tokens avec RTK.
+- Dashboard local et endpoint OpenAI-compatible.
+
+Reference future :
+9Router = routeur IA multi-fournisseurs + fallback + economie tokens pour coding agents.
+
+## DeepSeek-TUI
+
+URL : https://github.com/Hmbown/DeepSeek-TUI
+
+Resume en 3 lignes :
+DeepSeek-TUI est un agent de code en terminal pour les modeles DeepSeek.
+Il propose une interface TUI pour travailler dans le shell avec assistance IA.
+Il est utile pour coding agent leger, local dans le terminal, centre sur DeepSeek.
+
+Avantages principaux :
+- Interface terminal simple.
+- Oriente modeles DeepSeek.
+- Utile pour coding agent sans IDE lourd.
+- Bon pour workflows shell.
+- Alternative specialisee aux gros assistants de code.
+
+Reference future :
+DeepSeek-TUI = agent coding terminal + DeepSeek + interface TUI.
+
+## AI-Trader
+
+URL : https://github.com/HKUDS/AI-Trader
+
+Resume en 3 lignes :
+AI-Trader est un projet de recherche/outil autour du trading automatise par agents IA.
+Il vise des workflows agent-native pour analyse, decision et execution de trading.
+Usage a traiter comme experimental et risque, pas comme conseil financier.
+
+Avantages principaux :
+- Exemple d'architecture agentique appliquee au trading.
+- Utile pour recherche, backtesting et experimentation.
+- Montre comment structurer decisions et actions de marche.
+- Peut inspirer des agents financiers internes.
+- Attention forte : risque financier, validation et conformite obligatoires.
+
+Reference future :
+AI-Trader = agent IA de trading automatise + recherche + risque eleve.
+
+## Skills by Matt Pocock
+
+URL : https://github.com/mattpocock/skills
+
+Resume en 3 lignes :
+Ce repo contient des skills pratiques pour ingenieurs, issus d'une configuration Claude.
+Il sert de bibliotheque de procedures et prompts reutilisables pour developpement logiciel.
+Il est utile pour standardiser la maniere dont un agent IA execute certaines taches techniques.
+
+Avantages principaux :
+- Skills prets a adapter.
+- Oriente pratiques d'ingenierie reelles.
+- Bon modele pour creer ses propres skills.
+- Ameliore coherence des workflows agents.
+- Utile avec Claude Code et autres agents compatibles skills.
+
+Reference future :
+Skills = bibliotheque de workflows/prompts techniques pour agents IA.
+
+## SuperSplat
+
+URL : https://github.com/playcanvas/supersplat
+Demo : https://superspl.at/editor
+
+Resume en 3 lignes :
+SuperSplat est un editeur open source de 3D Gaussian Splats.
+Il permet d'inspecter, editer, optimiser et publier des scenes 3D splat dans le navigateur.
+Il est construit avec des technologies web et peut etre utilise sans installation via la demo.
+
+Avantages principaux :
+- Editeur 3DGS gratuit et open source.
+- Fonctionne dans le navigateur.
+- Utile pour visualisation, nettoyage et optimisation de splats.
+- Base PlayCanvas, WebGL/WebGPU.
+- Bon outil pour pipelines IA 3D, scan, photogrammetrie et scenes immersives.
+
+Reference future :
+SuperSplat = editeur web 3D Gaussian Splat + optimisation + publication.
+
+## Hysteria
+
+URL : https://github.com/apernet/hysteria
+
+Resume en 3 lignes :
+Hysteria est un proxy rapide et resistant a la censure.
+Le projet vise les connexions reseau performantes dans des environnements contraints.
+Il peut servir d'infrastructure proxy pour developpement, reseau ou acces distant legitime.
+
+Avantages principaux :
+- Proxy performant.
+- Oriente resistance aux restrictions reseau.
+- Projet mature et tres suivi.
+- Utile pour infrastructure, tests reseau et acces distant.
+- A utiliser selon les lois et politiques reseau applicables.
+
+Reference future :
+Hysteria = proxy rapide + resistance censure + infrastructure reseau.
