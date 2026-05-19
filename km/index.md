@@ -2,6 +2,7 @@
 
 | Date | Type | Title | Link | Tags | Priority |
 |---|---|---|---|---|---|
+| 2026-05-19 | prompt | MEUTE cognitive architecture protocol | [2026-05-19_prompt_meute-cognitive-architecture.md](prompts/2026-05-19_prompt_meute-cognitive-architecture.md) | meute, cognitive-architecture, veille, doctrine, critical-analysis, resilience | P0 |
 | 2026-05-19 | source | Anthropic 2028 AI leadership scenarios | [2026-05-19_source_anthropic-2028-ai-leadership.md](sources/2026-05-19_source_anthropic-2028-ai-leadership.md) | anthropic, ai-policy, geopolitics, compute, china, export-controls, read | P1 |
 | 2026-05-19 | source | AI tools Twitter batch May 19 | [2026-05-19_source_ai-tools-twitter-batch.md](sources/2026-05-19_source_ai-tools-twitter-batch.md) | ai-tools, x-twitter, github, open-source, read | P1 |
 | 2026-05-19 | source | Open-source repos as business opportunities | [2026-05-19_source_open-source-repos-business-opportunities.md](sources/2026-05-19_source_open-source-repos-business-opportunities.md) | open-source, business, saas, monetization, github, x-twitter | P2 |
