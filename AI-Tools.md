@@ -611,3 +611,62 @@ Avantages principaux :
 
 Reference future :
 ip.guide = API geolocalisation IP gratuite/simple.
+
+## Postiz
+
+URL repo : https://github.com/gitroomhq/postiz-app
+URL site : https://postiz.com
+
+Resume en 3 lignes :
+Postiz est un outil open source de planification et gestion social media avec fonctions IA.
+Il permet de programmer des posts, collaborer en equipe, analyser le travail et automatiser via API.
+Il supporte de nombreuses plateformes comme X, LinkedIn, TikTok, Facebook, Reddit, Bluesky, Mastodon, Slack et Discord.
+
+Avantages principaux :
+- Alternative open source a Buffer, Hypefury ou Twitter Hunter.
+- Version self-hosted disponible.
+- API publique, SDK Node, node n8n et integration Make.com.
+- Adapté aux workflows d'agents et automatisations.
+- Licence AGPL-3.0, donc verifier les obligations si usage commercial.
+
+Reference future :
+Postiz = social media scheduler open source + IA + API + self-hosted.
+
+## GrowChief
+
+URL repo : https://github.com/growchief/growchief
+URL site : https://growchief.com
+
+Resume en 3 lignes :
+GrowChief est un outil open source d'automatisation social media oriente outreach.
+Il permet de creer des workflows pour interagir avec des comptes sociaux : demandes de connexion, follow-up messages, etc.
+Il est pense pour s'integrer a n8n, Make, Zapier et autres workflows API.
+
+Avantages principaux :
+- Alternative open source a Phantombuster, Expandi, Zopto, LinkedIn Helper ou Meet Alfred.
+- Oriente prospection et outreach.
+- Compatible API et automatisations no-code.
+- Peut servir de brique growth automation.
+- Attention : respecter les limites plateformes et eviter le spam.
+
+Reference future :
+GrowChief = social outreach automation open source + workflows + n8n/API.
+
+## Social-Media-Automation
+
+URL : https://github.com/vasani-arpit/Social-Media-Automation
+
+Resume en 3 lignes :
+Social-Media-Automation est un projet pour automatiser l'activite sur plusieurs reseaux sociaux.
+L'objectif est de rester actif sur plusieurs plateformes sans actions manuelles permanentes.
+Le repo semble plus ancien/experimental que Postiz ou GrowChief, donc a traiter comme reference technique.
+
+Avantages principaux :
+- Exemple simple d'automatisation multi-reseaux.
+- Utile pour comprendre les patterns de scripts social media.
+- Peut inspirer des workflows personnels.
+- Moins adapte comme base production sans audit.
+- Attention aux conditions d'utilisation des plateformes.
+
+Reference future :
+Social-Media-Automation = scripts/reference d'automatisation social media, a auditer avant usage.
