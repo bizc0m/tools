@@ -290,3 +290,324 @@ Avantages principaux :
 
 Reference future :
 Hysteria = proxy rapide + resistance censure + infrastructure reseau.
+
+## GitHub Spec Kit
+
+URL : https://github.com/github/spec-kit
+Source : https://x.com/nicos_ai/status/2056478886280753455
+
+Resume en 3 lignes :
+Spec Kit est un toolkit open source de GitHub pour faire du spec-driven development avec des agents IA.
+Il force l'agent a produire une specification, clarifier les manques, planifier et decouper les taches avant de coder.
+Il s'integre a des agents comme Claude Code, Codex, Cursor, Copilot, Gemini CLI et autres.
+
+Avantages principaux :
+- Reduit le vibe coding vague.
+- Structure le flux : constitution, specification, clarification, plan, tasks, implementation.
+- Ameliore la previsibilite des agents de code.
+- Compatible avec plusieurs outils IA.
+- Utile pour projets complexes ou multi-agents.
+
+Reference future :
+Spec Kit = workflow spec-first pour agents IA + planification avant code.
+
+## agency-agents
+
+URL : https://github.com/msitarzewski/agency-agents
+Source : https://x.com/NFTCPS/status/2056188353490595903
+
+Resume en 3 lignes :
+agency-agents est une bibliotheque de roles d'agents IA specialises.
+Elle contient des personas et processus pour des profils comme CEO, avocat, developpeur, growth hacker ou experts metier.
+Les roles peuvent etre utilises dans Claude Code, Cursor ou d'autres agents pour simuler une equipe virtuelle.
+
+Avantages principaux :
+- Grande collection de roles prets a reutiliser.
+- Utile pour brainstorming, revue, strategie et execution.
+- Transforme un agent generaliste en conseiller specialise.
+- Peut servir de base pour composer une equipe multi-agents.
+- Format simple a adapter.
+
+Reference future :
+agency-agents = bibliotheque de personas experts pour agents IA.
+
+## Streambert
+
+URL : https://github.com/truelockmc/streambert
+Source : https://x.com/sukh_saroy/status/2056368727684452809
+
+Resume en 3 lignes :
+Streambert est une application desktop Electron pour chercher, streamer et telecharger films, series et anime.
+Elle utilise TMDB pour les metadonnees, AniList pour l'anime et des sources tierces pour les contenus.
+Le projet est open source GPL-3.0, mais son usage depend fortement du cadre legal local.
+
+Avantages principaux :
+- Application desktop cross-platform.
+- Interface unique pour films, series et anime.
+- Telechargements multithread, sous-titres et suivi de bibliotheque.
+- Zero publicite et zero tracking selon le projet.
+- Attention : risque legal eleve selon les sources de contenu utilisees.
+
+Reference future :
+Streambert = app desktop media streaming/download + sources tierces + verifier legalite.
+
+## freeLLMAPI
+
+URL : https://github.com/tashfeenahmed/freellmapi
+Source : https://x.com/david_attisaas/status/2056343039183147440
+
+Resume en 3 lignes :
+freeLLMAPI est un projet GitHub partage comme API gratuite pour modeles LLM.
+La promesse est de simplifier l'acces a des modeles sans configuration lourde.
+La valeur exacte depend du README, des limites et de la stabilite du service.
+
+Avantages principaux :
+- Point d'entree rapide pour tester des appels LLM.
+- Utile pour prototypes et experimentation.
+- Peut reduire la friction d'integration.
+- A verifier : limites, couts caches, securite et disponibilite.
+- Ne pas utiliser en production sans audit.
+
+Reference future :
+freeLLMAPI = API LLM gratuite pour tests rapides, a verifier avant usage serieux.
+
+## OpenWA
+
+URL : https://github.com/rmyndharis/OpenWA
+Source : https://x.com/_guillecasaus/status/2056316078888820874
+
+Resume en 3 lignes :
+OpenWA est une passerelle WhatsApp API open source et self-hosted.
+Elle vise messages, multimedia, webhooks, multi-compte et dashboard de gestion.
+Elle sert d'alternative controlee aux plateformes WhatsApp/API payantes ou verrouillees.
+
+Avantages principaux :
+- Self-hosted, moins de vendor lock-in.
+- API pour messages, medias et webhooks.
+- Dashboard pour sessions et cles API.
+- Potentiel multi-compte.
+- A verifier contre les conditions WhatsApp avant usage commercial.
+
+Reference future :
+OpenWA = API WhatsApp self-hosted + webhooks + dashboard.
+
+## yt-dlp
+
+URL : https://github.com/yt-dlp/yt-dlp
+Source : https://x.com/HowToAI_/status/2056497305780457685
+
+Resume en 3 lignes :
+yt-dlp est un CLI open source pour telecharger videos, audio, sous-titres et metadonnees depuis de nombreuses plateformes.
+C'est un fork actif de youtube-dl avec support et correctifs frequents.
+Il sert aux usages d'archivage, extraction media et workflows automatises.
+
+Avantages principaux :
+- Support tres large de sites.
+- CLI scriptable et robuste.
+- Gestion formats, playlists, sous-titres et metadonnees.
+- Utile pour workflows data/video et archivage legitime.
+- Attention aux droits d'auteur et conditions des plateformes.
+
+Reference future :
+yt-dlp = CLI media download/archivage + formats + sous-titres.
+
+## OpenCut
+
+URL repo : https://github.com/opencut-app/opencut
+URL site : https://opencut.io/
+Source : https://x.com/KanikaBK/status/2056412075434659960
+
+Resume en 3 lignes :
+OpenCut est un editeur video open source presente comme alternative a CapCut.
+Il vise le montage sans watermark, sans abonnement et avec meilleure confidentialite.
+Le projet cible web, desktop et mobile selon la documentation du repo.
+
+Avantages principaux :
+- Gratuit et open source.
+- Pas de watermark annonce.
+- Alternative a CapCut.
+- Orientation privacy-first.
+- Utile pour createurs qui veulent eviter abonnements et tracking.
+
+Reference future :
+OpenCut = editeur video open source type CapCut + sans watermark.
+
+## OSINT Cabal Live Center
+
+URL : https://osintcabal.org/livecenter/
+Source : https://x.com/cyb_detective/status/2056325264246706649
+
+Resume en 3 lignes :
+OSINT Cabal Live Center regroupe des versions web de plusieurs outils OSINT en ligne.
+Il reference des outils comme Ghunt, Holehe, BlackBird et autres.
+Il sert a lancer rapidement des recherches OSINT sans installer chaque CLI localement.
+
+Avantages principaux :
+- Acces web a plusieurs outils OSINT.
+- Gain de temps pour investigations rapides.
+- Utile pour SOCMINT, reconnaissance et verification.
+- Evite une partie de l'installation locale.
+- A utiliser legalement et avec prudence sur les donnees personnelles.
+
+Reference future :
+OSINT Cabal Live Center = hub web d'outils OSINT.
+
+## MoneyPrinter
+
+URL : https://github.com/FujiwaraChoki/MoneyPrinter
+Source : https://x.com/tom_doerr/status/2056509860162756860
+
+Resume en 3 lignes :
+MoneyPrinter automatise la creation de YouTube Shorts a partir de sujets video.
+Le projet utilise MoviePy pour generer des videos courtes.
+Il sert de base pour pipelines de contenu automatise.
+
+Avantages principaux :
+- Automatise une partie de la production Shorts.
+- Utile pour prototypage de chaines video.
+- Base Python/film generation scriptable.
+- Peut servir de demo de pipeline contenu IA.
+- Attention : qualite, droits media et spam platform policy.
+
+Reference future :
+MoneyPrinter = generation automatisee de YouTube Shorts.
+
+## free-claude-code
+
+URL : https://github.com/Alishahryar1/free-claude-code
+Source : https://x.com/dr_cintas/status/2056077614113325373
+
+Resume en 3 lignes :
+free-claude-code est un proxy Anthropic-compatible pour utiliser Claude Code avec d'autres providers.
+Il route les appels Claude Code vers NVIDIA NIM, Kimi, OpenRouter, DeepSeek, LM Studio, llama.cpp, Ollama et autres.
+Il garde le client Claude Code tout en changeant le backend modele.
+
+Avantages principaux :
+- Proxy drop-in pour Claude Code.
+- Plusieurs backends gratuits, locaux ou payants.
+- Streaming, tool use et model routing.
+- Admin UI locale.
+- Utile pour reduire couts ou tester des modeles alternatifs.
+
+Reference future :
+free-claude-code = proxy Claude Code vers NVIDIA NIM/local/OpenRouter/autres.
+
+## Open-Generative-AI
+
+URL : https://github.com/Anil-matcha/Open-Generative-AI
+Source : https://x.com/InduTripat82427/status/2056408789327462486
+
+Resume en 3 lignes :
+Open-Generative-AI est un studio open source pour generation image et video.
+Il se presente comme alternative a Higgsfield, Freepik AI, Krea AI et OpenArt, avec acces a de nombreux modeles.
+Il vise des workflows creatifs avec Flux, Kling, Sora, Veo et modeles similaires selon le projet.
+
+Avantages principaux :
+- Studio image/video open source.
+- Nombreux modeles regroupes.
+- Utile pour experimentation creative.
+- Peut s'integrer a des workflows Claude Code/Codex via skills.
+- A verifier : dependances externes, couts API et droits d'usage des modeles.
+
+Reference future :
+Open-Generative-AI = studio open source image/video multi-modeles.
+
+## Superpowers
+
+URL : https://github.com/obra/superpowers
+Source : https://x.com/arceyul/status/2056108436224430139
+
+Resume en 3 lignes :
+Superpowers est un framework de skills et methodologie pour agents de code.
+Il impose brainstorming, specification, plan, TDD, subagents, review et finalisation.
+Il fonctionne avec Claude Code, Codex, Cursor, Gemini CLI, OpenCode, Copilot CLI et autres.
+
+Avantages principaux :
+- Discipline les agents avec un processus senior.
+- Met l'accent sur TDD red/green.
+- Supporte subagents et git worktrees.
+- Compatible multi-agents/outils.
+- Utile pour reduire hallucinations, code mort et derive de contexte.
+
+Reference future :
+Superpowers = skills + workflow TDD pour agents coding.
+
+## ViMax
+
+URL : https://github.com/HKUDS/ViMax
+Source : https://x.com/NFTCPS/status/2056190651939848534
+
+Resume en 3 lignes :
+ViMax est un systeme multi-agent pour generation video a partir d'idee, script ou roman.
+Le projet vise coordination de roles comme realisateur, scenariste et producteur.
+Il cherche a produire des videos avec narration, personnages et scenes coherentes.
+
+Avantages principaux :
+- Workflow video multi-agent.
+- Utile pour prototypage de films courts ou scenes narratives.
+- Peut transformer texte long en pipeline video.
+- Projet de recherche/creation a surveiller.
+- A verifier : qualite reelle, couts modeles et licences media.
+
+Reference future :
+ViMax = multi-agent video generation depuis idee/script/roman.
+
+## J.A.R.V.I.S
+
+URL : https://github.com/GauravSingh9356/J.A.R.V.I.S
+Source : https://x.com/tom_doerr/status/2056514018135642189
+
+Resume en 3 lignes :
+J.A.R.V.I.S est un assistant personnel Python avec OCR et controle vocal.
+Il peut ouvrir des sites, rechercher, lire des informations, gerer des taches et utiliser des APIs.
+Le projet sert de base d'assistant desktop/terminal extensible.
+
+Avantages principaux :
+- Assistant Python facile a inspecter.
+- OCR et commandes vocales.
+- Automatisation web et recherche.
+- Bon exemple pedagogique d'assistant personnel.
+- A moderniser avant usage production.
+
+Reference future :
+J.A.R.V.I.S = assistant Python vocal + OCR + automatisation web.
+
+## Open Design
+
+URL : https://github.com/nexu-io/open-design
+Source : https://x.com/tuturetom/status/2056258502050357334
+
+Resume en 3 lignes :
+Open Design est une alternative open source orientee Claude Design.
+Le projet integre des templates, skills et design systems pour generer des interfaces par prompt.
+Il vise la creation rapide de designs et prototypes web.
+
+Avantages principaux :
+- Templates et design systems prets a l'emploi.
+- Workflow design par prompt.
+- Open source.
+- Utile pour prototypage UI rapide.
+- Bon candidat pour agents frontend/design.
+
+Reference future :
+Open Design = alternative open source Claude Design + templates + skills UI.
+
+## ip.guide
+
+URL : https://ip.guide
+Source : https://x.com/midudev/status/2056030422778196039
+
+Resume en 3 lignes :
+ip.guide est une API gratuite pour obtenir la localisation d'une adresse IP.
+Elle est presentee comme illimitee et sans logs par le post source.
+Elle fonctionne depuis JavaScript, Python, PHP ou tout langage capable d'appeler une API HTTP.
+
+Avantages principaux :
+- API simple pour geolocalisation IP.
+- Pas de SDK obligatoire.
+- Utile pour prototypes, enrichissement logs et outils reseau.
+- A verifier : limites, precision, politique de logs et conditions.
+- Ne pas utiliser pour decisions sensibles sans validation.
+
+Reference future :
+ip.guide = API geolocalisation IP gratuite/simple.
