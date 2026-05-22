@@ -670,3 +670,26 @@ Avantages principaux :
 
 Reference future :
 Social-Media-Automation = scripts/reference d'automatisation social media, a auditer avant usage.
+
+## Lot X - AI Open Source Tools Watch
+
+Source KM : `/Users/JOB/###DEV/KM/watch/ai-open-source-tools-watch.md`
+Sources X : lot fourni le 2026-05-22
+
+Resume en 3 lignes :
+Lot de veille sur outils IA/open source : alternatives SaaS, agents vocaux, video IA, RAG local, MCP, OSINT image et devtools.
+Le lot contient 10 liens fournis, dont 9 uniques apres deduplication.
+Les outils sont a verifier avant integration, surtout finance, OSINT et redirection de trafic IA.
+
+Outils et themes reperes :
+- Pipecat : framework Python pour agents vocaux temps reel.
+- ARGO : alternative locale/open source a Manus, avec RAG, Ollama et MCP.
+- ViMax : generation de courts films depuis idee, prompt ou texte long.
+- Spacesuit : canvas/adaptive workspace multiplateforme.
+- Cal.com, Plausible, Ghost, n8n, Supabase, Medusa, AppFlowy, Coolify, Listmonk : alternatives open source monetisables.
+- OpenScreen, Voicebox, OpenShorts, FreeLLMAPI, Playwright MCP, Vibe-Trading, Cal.com, Whisper, Postiz, Vaultwarden : alternatives SaaS citees dans le lot.
+- Image OSINT tools : utile mais sensible, usage strictement privacy-first.
+- Redirection Claude Code vers fournisseurs gratuits : a verifier pour securite, legalite, conditions d'usage et secrets.
+
+Reference future :
+Lot X = watch IA open source/devtools, a convertir en fiches individuelles apres verification des repos.
