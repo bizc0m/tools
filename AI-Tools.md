@@ -828,3 +828,26 @@ Garde-fous :
 
 Reference future :
 CC-GUI / MossX = editeur vibe coding multi-engine, `a verifier`, sensible.
+
+## Hermes Agent
+
+URL : https://github.com/NousResearch/hermes-agent
+Documentation : https://hermes-agent.nousresearch.com/docs
+Installation locale : /Users/JOB/_Hermes/hermes-agent
+Commande : /Users/JOB/.local/bin/hermes
+
+Resume en 3 lignes :
+Hermes Agent est un agent IA open source auto-ameliorant avec CLI, TUI, gateway de messagerie, memoire et skills.
+Il supporte plusieurs fournisseurs de modeles via Nous Portal, OpenRouter, OpenAI, Hugging Face et endpoints compatibles.
+Il peut fonctionner localement ou sur serveur, avec cron, outils navigateur, sous-agents et historique de sessions.
+
+Avantages principaux :
+- Installation officielle via script NousResearch.
+- CLI `hermes` disponible dans ~/.local/bin.
+- Skills integres et synchronises dans ~/.hermes/skills/.
+- Configuration centralisee dans ~/.hermes/config.yaml et ~/.hermes/.env.
+- Compatible gateway Telegram, Discord, Slack, WhatsApp, Signal et Email.
+- Utile comme agent IA personnel evolutif, multi-fournisseurs et multi-outils.
+
+Reference future :
+Hermes Agent = agent IA open source auto-ameliorant + CLI/TUI + gateway messages + memoire + skills.
