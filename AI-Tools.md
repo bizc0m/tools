@@ -829,6 +829,28 @@ Garde-fous :
 Reference future :
 CC-GUI / MossX = editeur vibe coding multi-engine, `a verifier`, sensible.
 
+## Claude Code
+
+URL : https://www.anthropic.com/claude-code
+Package npm : https://www.npmjs.com/package/@anthropic-ai/claude-code
+Commande locale : claude
+Version installee : 2.1.165
+
+Resume en 3 lignes :
+Claude Code est l agent de code officiel d Anthropic en terminal.
+Il permet de lire, modifier, tester et orchestrer un projet local avec Claude.
+Il fonctionne via la commande `claude` et une authentification Anthropic.
+
+Avantages principaux :
+- Agent de code CLI officiel Anthropic.
+- Installation simple via npm global.
+- Peut travailler directement dans un repo local.
+- Compatible workflows terminal, git, tests et refactor.
+- Utile comme agent complementaire a Codex et Hermes Agent.
+
+Reference future :
+Claude Code = agent coding officiel Anthropic + CLI `claude` + workflows repo local.
+
 ## Hermes Agent
 
 URL : https://github.com/NousResearch/hermes-agent
