@@ -181,20 +181,31 @@ document.querySelectorAll(".tree-row.root").forEach((row) => {
   });
 });
 
-document.querySelectorAll(".tab").forEach((tab) => {
-  tab.addEventListener("click", () => {
-    if (tab.classList.contains("add")) {
-      showToast("Nouvel onglet a connecter");
-      return;
-    }
-    document.querySelectorAll(".tab").forEach((item) => item.classList.remove("active"));
-    tab.classList.add("active");
-    const service = tab.textContent.replace("×", "").trim();
-    if (providerName) providerName.textContent = service;
-    if (answerTitle) answerTitle.textContent = service;
-    showToast(`${service} actif`);
+// Re-attach tab listeners dynamically
+function attachTabListeners() {
+  document.querySelectorAll(".tab").forEach((tab) => {
+    if (tab._listenerAttached) return;
+    tab._listenerAttached = true;
+
+    tab.addEventListener("click", () => {
+      if (tab.classList.contains("add")) {
+        showToast("Nouvel onglet a connecter");
+        return;
+      }
+      if (tab.classList.contains("split-mode")) {
+        return; // Handled separately
+      }
+      document.querySelectorAll(".tab").forEach((item) => item.classList.remove("active"));
+      tab.classList.add("active");
+      const service = tab.textContent.replace("×", "").trim();
+      if (providerName) providerName.textContent = service;
+      if (answerTitle) answerTitle.textContent = service;
+      showToast(`${service} actif`);
+    });
   });
-});
+}
+
+attachTabListeners();
 
 document.querySelectorAll(".inspector-tabs button").forEach((tab) => {
   tab.addEventListener("click", () => {
@@ -242,13 +253,21 @@ splitTab?.addEventListener("click", () => {
   showToast("Mode Split activé - Chat et Terminal côte à côte");
 });
 
+function extractServiceName(tab) {
+  const text = tab.textContent.replace("×", "").trim();
+  const serviceLabel = tab.querySelector(".row-label");
+  if (serviceLabel) return serviceLabel.textContent;
+  // Fallback: remove first 2 chars (icon text like "AI", "CG", etc.)
+  return text.replace(/^[A-Z]{1,2}/, "").trim();
+}
+
 document.querySelectorAll(".tab[data-mode='chat']").forEach((tab) => {
   tab.addEventListener("click", () => {
     document.querySelectorAll(".tab").forEach((item) => item.classList.remove("active"));
     tab.classList.add("active");
     chatMode.classList.add("active");
     splitMode.classList.remove("active");
-    const service = tab.textContent.replace("×", "").trim();
+    const service = extractServiceName(tab);
     if (providerName) providerName.textContent = service;
     if (answerTitle) answerTitle.textContent = service;
     showToast(`${service} actif`);
@@ -258,9 +277,6 @@ document.querySelectorAll(".tab[data-mode='chat']").forEach((tab) => {
 // Terminal Management
 let terminalCount = 0;
 const maxTerminals = 4;
-const terminalsContainer = document.querySelector("#terminalsContainer");
-const terminalTabs = document.querySelector(".terminal-tabs");
-const addTerminalBtn = terminalTabs?.querySelector(".terminal-tab.add");
 const terminalColorMap = {
   0: { color: "#16a365", name: "Terminal 1" },
   1: { color: "#1677ff", name: "Terminal 2" },
@@ -268,9 +284,26 @@ const terminalColorMap = {
   3: { color: "#7c3aed", name: "Terminal 4" }
 };
 
+function getTerminalsContainer() {
+  return document.querySelector("#terminalsContainer");
+}
+
+function getTerminalTabs() {
+  return document.querySelector(".terminal-tabs");
+}
+
+function getAddTerminalBtn() {
+  const terminalTabs = getTerminalTabs();
+  return terminalTabs?.querySelector(".terminal-tab.add");
+}
+
 function createTerminalTab(index) {
   const color = terminalColorMap[index].color;
   const name = terminalColorMap[index].name;
+  const terminalTabs = getTerminalTabs();
+
+  if (!terminalTabs) return;
+
   const tab = document.createElement("button");
   tab.className = "terminal-tab";
   tab.style.setProperty("--color", color);
@@ -280,25 +313,31 @@ function createTerminalTab(index) {
   if (index === 0) tab.classList.add("active");
 
   tab.addEventListener("click", () => {
-    document.querySelectorAll(".terminal-tab").forEach((t) => t.classList.remove("active"));
+    document.querySelectorAll(".terminal-tab:not(.add)").forEach((t) => t.classList.remove("active"));
     tab.classList.add("active");
     showToast(`${name} actif`);
   });
 
-  const closeBtn = tab;
-  closeBtn.addEventListener("contextmenu", (e) => {
+  tab.addEventListener("contextmenu", (e) => {
     e.preventDefault();
     if (confirm(`Fermer ${name} ?`)) {
       removeTerminal(index);
     }
   });
 
-  terminalTabs.insertBefore(tab, addTerminalBtn);
+  const addBtn = getAddTerminalBtn();
+  if (addBtn) {
+    terminalTabs.insertBefore(tab, addBtn);
+  }
 }
 
 function createTerminalRow(index) {
   const color = terminalColorMap[index].color;
   const name = terminalColorMap[index].name;
+  const terminalsContainer = getTerminalsContainer();
+
+  if (!terminalsContainer) return;
+
   const row = document.createElement("button");
   row.className = "tree-row child";
   row.style.setProperty("--color", color);
@@ -320,11 +359,14 @@ function addTerminal() {
   createTerminalTab(terminalCount);
   createTerminalRow(terminalCount);
 
-  const emptyState = terminalsContainer.querySelector(".empty-state");
-  if (emptyState) emptyState.remove();
+  const terminalsContainer = getTerminalsContainer();
+  if (terminalsContainer) {
+    const emptyState = terminalsContainer.querySelector(".empty-state");
+    if (emptyState) emptyState.remove();
 
-  const badge = document.querySelector(".tree-row.root[data-service='Terminaux'] .badge");
-  if (badge) badge.textContent = terminalCount + 1;
+    const badge = document.querySelector(".tree-row.root[data-service='Terminaux'] .badge");
+    if (badge) badge.textContent = terminalCount + 1;
+  }
 
   terminalCount++;
   showToast(`Terminal ${terminalColorMap[terminalCount - 1].name} ajouté`);
@@ -342,7 +384,8 @@ function removeTerminal(index) {
   const badge = document.querySelector(".tree-row.root[data-service='Terminaux'] .badge");
   if (badge) badge.textContent = terminalCount;
 
-  if (terminalCount === 0) {
+  const terminalsContainer = getTerminalsContainer();
+  if (terminalsContainer && terminalCount === 0) {
     terminalsContainer.innerHTML = '<div class="empty-state">Cliquez sur + pour ajouter un terminal (max 4)</div>';
   }
 
@@ -354,7 +397,12 @@ function removeTerminal(index) {
   showToast(`Terminal ${terminalColorMap[index].name} supprimé`);
 }
 
-addTerminalBtn?.addEventListener("click", addTerminal);
+// Attach click handler to add terminal button
+document.addEventListener("click", (e) => {
+  if (e.target.closest(".terminal-tab.add")) {
+    addTerminal();
+  }
+});
 
 // LLM Right-Click Config
 const configLlmDialog = document.querySelector("#configLlmDialog");
