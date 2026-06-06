@@ -85,6 +85,18 @@ openPrefsButtons.forEach((button) => {
   });
 });
 
+document.querySelector(".dot.red")?.addEventListener("click", () => {
+  window.llmRoxWindow?.close();
+});
+
+document.querySelector(".dot.yellow")?.addEventListener("click", () => {
+  window.llmRoxWindow?.minimize();
+});
+
+document.querySelector(".dot.green")?.addEventListener("click", () => {
+  window.llmRoxWindow?.maximize();
+});
+
 sendButton.addEventListener("click", (event) => {
   event.stopPropagation();
   sendPopover.classList.toggle("open");
@@ -156,5 +168,33 @@ document.querySelectorAll(".tree-row.root").forEach((row) => {
     document.querySelectorAll(".tree-row.root").forEach((item) => item.classList.remove("active"));
     row.classList.add("active");
     showToast(`${row.dataset.service} selectionne`);
+  });
+});
+
+document.querySelectorAll(".tab").forEach((tab) => {
+  tab.addEventListener("click", () => {
+    if (tab.classList.contains("add")) {
+      showToast("Nouvel onglet a connecter");
+      return;
+    }
+    document.querySelectorAll(".tab").forEach((item) => item.classList.remove("active"));
+    tab.classList.add("active");
+    showToast(`${tab.textContent.replace("×", "").trim()} actif`);
+  });
+});
+
+document.querySelectorAll(".inspector-tabs button").forEach((tab) => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll(".inspector-tabs button").forEach((item) => item.classList.remove("active"));
+    tab.classList.add("active");
+    showToast(`${tab.textContent.trim()} actif`);
+  });
+});
+
+document.querySelectorAll(".prefs-nav button").forEach((tab) => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll(".prefs-nav button").forEach((item) => item.classList.remove("active"));
+    tab.classList.add("active");
+    showToast(`Preferences: ${tab.textContent.trim()}`);
   });
 });

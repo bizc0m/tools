@@ -1,0 +1,12 @@
+{
+  "name": "llm-rox",
+  "version": "0.1.0",
+  "description": "LLM-ROX desktop prototype",
+  "main": "main.cjs",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^41.2.1"
+  }
+}

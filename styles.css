@@ -41,6 +41,7 @@ button,
 input,
 select {
   font: inherit;
+  -webkit-app-region: no-drag;
 }
 
 button {
@@ -81,6 +82,7 @@ button {
   padding: 16px 18px 8px;
   display: flex;
   gap: 10px;
+  -webkit-app-region: drag;
 }
 
 .dot {
@@ -88,6 +90,7 @@ button {
   height: 14px;
   border-radius: 50%;
   border: 1px solid rgba(0, 0, 0, 0.12);
+  -webkit-app-region: no-drag;
 }
 
 .dot.red { background: #ff5f57; }
@@ -101,6 +104,11 @@ button {
 .sidebar-foot {
   display: flex;
   align-items: center;
+}
+
+.tabs,
+.provider-head {
+  -webkit-app-region: drag;
 }
 
 .sidebar-head {
