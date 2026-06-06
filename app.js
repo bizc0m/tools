@@ -9,6 +9,13 @@ const exportPdfButton = document.querySelector("#exportPdf");
 const expandMacroButton = document.querySelector("#expandMacro");
 const composerInput = document.querySelector("#composerInput");
 const toast = document.querySelector("#toast");
+const providerName = document.querySelector(".provider-title h2");
+const answerTitle = document.querySelector(".answer h3");
+const activeInspectorPanel = document.querySelector("#activeInspectorPanel");
+
+function on(element, eventName, handler) {
+  element?.addEventListener(eventName, handler);
+}
 
 const macroValues = {
   "..d": "2026-06-06",
@@ -97,13 +104,13 @@ document.querySelector(".dot.green")?.addEventListener("click", () => {
   window.llmRoxWindow?.maximize();
 });
 
-sendButton.addEventListener("click", (event) => {
+on(sendButton, "click", (event) => {
   event.stopPropagation();
   sendPopover.classList.toggle("open");
   sendPopover.setAttribute("aria-hidden", String(!sendPopover.classList.contains("open")));
 });
 
-sendPopover.addEventListener("click", async (event) => {
+on(sendPopover, "click", async (event) => {
   const target = event.target.closest("button")?.dataset.target;
   if (!target) return;
 
@@ -127,7 +134,7 @@ sendPopover.addEventListener("click", async (event) => {
   showToast(`Pret a partager vers ${target}`);
 });
 
-saveChatButton.addEventListener("click", async () => {
+on(saveChatButton, "click", async () => {
   await copyToClipboard(renderMarkdownExport());
   handoffLog.innerHTML = `
     <h3>Suivi LLM</h3>
@@ -137,17 +144,17 @@ saveChatButton.addEventListener("click", async () => {
   showToast("Export Markdown copie");
 });
 
-exportMdButton.addEventListener("click", async () => {
+on(exportMdButton, "click", async () => {
   await copyToClipboard(renderMarkdownExport());
   showToast(".MD copie dans le presse-papier");
 });
 
-exportPdfButton.addEventListener("click", () => {
+on(exportPdfButton, "click", () => {
   showToast("Simulation export PDF");
   window.setTimeout(() => window.print(), 250);
 });
 
-expandMacroButton.addEventListener("click", () => {
+on(expandMacroButton, "click", () => {
   let value = composerInput.value;
   Object.entries(macroValues).forEach(([key, replacement]) => {
     value = value.split(key).join(replacement);
@@ -167,7 +174,10 @@ document.querySelectorAll(".tree-row.root").forEach((row) => {
   row.addEventListener("click", () => {
     document.querySelectorAll(".tree-row.root").forEach((item) => item.classList.remove("active"));
     row.classList.add("active");
-    showToast(`${row.dataset.service} selectionne`);
+    const service = row.dataset.service || row.textContent.trim();
+    if (providerName) providerName.textContent = service;
+    if (answerTitle) answerTitle.textContent = service;
+    showToast(`${service} selectionne`);
   });
 });
 
@@ -179,7 +189,10 @@ document.querySelectorAll(".tab").forEach((tab) => {
     }
     document.querySelectorAll(".tab").forEach((item) => item.classList.remove("active"));
     tab.classList.add("active");
-    showToast(`${tab.textContent.replace("×", "").trim()} actif`);
+    const service = tab.textContent.replace("×", "").trim();
+    if (providerName) providerName.textContent = service;
+    if (answerTitle) answerTitle.textContent = service;
+    showToast(`${service} actif`);
   });
 });
 
@@ -187,7 +200,11 @@ document.querySelectorAll(".inspector-tabs button").forEach((tab) => {
   tab.addEventListener("click", () => {
     document.querySelectorAll(".inspector-tabs button").forEach((item) => item.classList.remove("active"));
     tab.classList.add("active");
-    showToast(`${tab.textContent.trim()} actif`);
+    const label = tab.textContent.trim();
+    if (activeInspectorPanel) {
+      activeInspectorPanel.innerHTML = `<h3>${label}</h3><p>Panneau ${label} actif. Les cartes restent en demo mais le clic est bien branche.</p>`;
+    }
+    showToast(`${label} actif`);
   });
 });
 

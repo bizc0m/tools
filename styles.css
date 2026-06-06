@@ -45,7 +45,8 @@ select {
 }
 
 button {
-  cursor: default;
+  cursor: pointer;
+  user-select: none;
 }
 
 .desktop {
@@ -91,6 +92,12 @@ button {
   border-radius: 50%;
   border: 1px solid rgba(0, 0, 0, 0.12);
   -webkit-app-region: no-drag;
+  cursor: pointer;
+}
+
+.dot:hover {
+  filter: brightness(0.95);
+  transform: scale(1.04);
 }
 
 .dot.red { background: #ff5f57; }
@@ -108,7 +115,7 @@ button {
 
 .tabs,
 .provider-head {
-  -webkit-app-region: drag;
+  -webkit-app-region: no-drag;
 }
 
 .sidebar-head {
@@ -186,6 +193,16 @@ button {
 
 .tree-row:hover {
   background: #eef3f5;
+}
+
+.tree-row:active,
+.tab:active,
+.secondary:active,
+.primary:active,
+.send-button:active,
+.icon-button:active,
+.primary-light:active {
+  transform: translateY(1px);
 }
 
 .tree-row.active,
@@ -399,6 +416,10 @@ button {
   border-color: var(--line);
   border-bottom-color: #fff;
   box-shadow: 0 -8px 18px rgba(15, 23, 42, 0.04);
+}
+
+.tab:hover {
+  background: #f3f7f9;
 }
 
 .tab.add {
