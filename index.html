@@ -137,6 +137,18 @@
               </button>
             </section>
 
+            <section class="tree-group">
+              <button class="tree-row root expanded-row" data-service="Terminaux">
+                <span class="chevron">⌄</span>
+                <span class="mini-icon terminal"></span>
+                <span class="row-label">Terminaux</span>
+                <span class="badge pale">0</span>
+              </button>
+              <div class="children expanded" id="terminalsContainer">
+                <div class="empty-state">Cliquez sur + pour ajouter un terminal (max 4)</div>
+              </div>
+            </section>
+
             <section class="tree-group bottom">
               <button class="tree-row child">
                 <span class="mini-icon inbox"></span>
@@ -159,90 +171,131 @@
 
         <section class="workspace">
           <header class="tabs">
-            <button class="tab active"><span class="service-icon claude small">AI</span>Claude <span class="close">×</span></button>
-            <button class="tab"><span class="service-icon chatgpt small">CG</span>ChatGPT <span class="close">×</span></button>
-            <button class="tab"><span class="service-icon gemini small">G</span>Gemini <span class="close">×</span></button>
-            <button class="tab"><span class="service-icon perplexity small">PX</span>Perplexity <span class="close">×</span></button>
-            <button class="tab"><span class="service-icon notion small">N</span>Notion <span class="close">×</span></button>
+            <button class="tab active" data-mode="chat"><span class="service-icon claude small">AI</span>Claude <span class="close">×</span></button>
+            <button class="tab" data-mode="chat"><span class="service-icon chatgpt small">CG</span>ChatGPT <span class="close">×</span></button>
+            <button class="tab" data-mode="chat"><span class="service-icon gemini small">G</span>Gemini <span class="close">×</span></button>
+            <button class="tab" data-mode="chat"><span class="service-icon perplexity small">PX</span>Perplexity <span class="close">×</span></button>
+            <button class="tab" data-mode="chat"><span class="service-icon notion small">N</span>Notion <span class="close">×</span></button>
+            <button class="tab split-mode" data-mode="split">⬌ Split</button>
             <button class="tab add">+</button>
           </header>
 
-          <section class="provider-head">
-            <div class="provider-title">
-              <span class="service-icon claude">AI</span>
-              <h2>Claude</h2>
-              <button class="plain-button">⌄</button>
-              <select aria-label="Model">
-                <option>Claude 3.5 Sonnet</option>
-                <option>Claude Opus</option>
-                <option>Claude Haiku</option>
-              </select>
-            </div>
-            <div class="provider-actions">
-              <button class="icon-button" title="Favorite" aria-label="Favorite">☆</button>
-              <button class="icon-button" title="History" aria-label="History">↻</button>
-              <button class="icon-button" title="Menu" aria-label="Menu">⋮</button>
-            </div>
-          </section>
-
-          <section class="chat-shell">
-            <article class="message user">
-              <div>
-                <strong>You</strong>
-                <p>Peux-tu m'aider a structurer une strategie de contenu pour ImpactIA sur les 3 prochains mois ?</p>
+          <div id="chatMode" class="workspace-mode active">
+            <section class="provider-head">
+              <div class="provider-title">
+                <span class="service-icon claude">AI</span>
+                <h2>Claude</h2>
+                <button class="plain-button">⌄</button>
+                <select aria-label="Model">
+                  <option>Claude 3.5 Sonnet</option>
+                  <option>Claude Opus</option>
+                  <option>Claude Haiku</option>
+                </select>
               </div>
-              <time>12:47</time>
-            </article>
+              <div class="provider-actions">
+                <button class="icon-button" title="Favorite" aria-label="Favorite">☆</button>
+                <button class="icon-button" title="History" aria-label="History">↻</button>
+                <button class="icon-button" title="Menu" aria-label="Menu">⋮</button>
+              </div>
+            </section>
 
-            <article class="assistant-message">
-              <span class="service-icon claude">AI</span>
-              <div class="answer">
-                <h3>Claude</h3>
-                <p>Bien sur. Voici une structure de strategie de contenu sur 3 mois pour ImpactIA.</p>
-                <hr />
-                <h4>Strategie de contenu ImpactIA - 3 prochains mois</h4>
-                <h5>Objectif general</h5>
-                <p>Positionner ImpactIA comme une reference francophone sur l'IA appliquee, en apportant de la valeur concrete, pedagogique et actionnable.</p>
-                <hr />
-                <h5>Mois 1 - Fondation & Awareness</h5>
-                <ul>
-                  <li>4 articles de blog : concepts cles de l'IA expliques simplement</li>
-                  <li>2 etudes de cas : applications concretes</li>
-                  <li>1 guide pratique : "Bien demarrer avec l'IA"</li>
-                  <li>3 posts LinkedIn par semaine</li>
-                  <li>1 newsletter / semaine</li>
-                </ul>
-                <div class="message-actions">
-                  <button class="secondary">Copy</button>
-                  <button class="secondary">Retry</button>
-                  <div class="send-menu">
-                    <button class="secondary strong" id="sendToLlm">Send to LLM</button>
-                    <div class="send-popover" id="sendPopover" aria-hidden="true">
-                      <strong>Partager vers</strong>
-                      <button data-target="ChatGPT">ChatGPT</button>
-                      <button data-target="Gemini">Gemini</button>
-                      <button data-target="Perplexity">Perplexity</button>
-                      <hr />
-                      <button data-target="Clipboard">Clipboard + focus</button>
+            <section class="chat-shell">
+              <article class="message user">
+                <div>
+                  <strong>You</strong>
+                  <p>Peux-tu m'aider a structurer une strategie de contenu pour ImpactIA sur les 3 prochains mois ?</p>
+                </div>
+                <time>12:47</time>
+              </article>
+
+              <article class="assistant-message">
+                <span class="service-icon claude">AI</span>
+                <div class="answer">
+                  <h3>Claude</h3>
+                  <p>Bien sur. Voici une structure de strategie de contenu sur 3 mois pour ImpactIA.</p>
+                  <hr />
+                  <h4>Strategie de contenu ImpactIA - 3 prochains mois</h4>
+                  <h5>Objectif general</h5>
+                  <p>Positionner ImpactIA comme une reference francophone sur l'IA appliquee, en apportant de la valeur concrete, pedagogique et actionnable.</p>
+                  <hr />
+                  <h5>Mois 1 - Fondation & Awareness</h5>
+                  <ul>
+                    <li>4 articles de blog : concepts cles de l'IA expliques simplement</li>
+                    <li>2 etudes de cas : applications concretes</li>
+                    <li>1 guide pratique : "Bien demarrer avec l'IA"</li>
+                    <li>3 posts LinkedIn par semaine</li>
+                    <li>1 newsletter / semaine</li>
+                  </ul>
+                  <div class="message-actions">
+                    <button class="secondary">Copy</button>
+                    <button class="secondary">Retry</button>
+                    <div class="send-menu">
+                      <button class="secondary strong" id="sendToLlm">Send to LLM</button>
+                      <div class="send-popover" id="sendPopover" aria-hidden="true">
+                        <strong>Partager vers</strong>
+                        <button data-target="ChatGPT">ChatGPT</button>
+                        <button data-target="Gemini">Gemini</button>
+                        <button data-target="Perplexity">Perplexity</button>
+                        <hr />
+                        <button data-target="Clipboard">Clipboard + focus</button>
+                      </div>
                     </div>
+                    <button class="secondary">Save node</button>
                   </div>
-                  <button class="secondary">Save node</button>
+                </div>
+              </article>
+            </section>
+
+            <footer class="composer">
+              <button class="icon-button large" aria-label="Add context">+</button>
+              <button class="icon-button large" aria-label="Settings">☷</button>
+              <select aria-label="Active profile">
+                <option>Claude JOB / Strategie</option>
+                <option>Claude ImpactIA / Redaction</option>
+                <option>Claude Test / Critique</option>
+              </select>
+              <input id="composerInput" value="..d  #Projet  Peux-tu transformer cette reponse en plan actionnable ?" aria-label="Prompt input" />
+              <button class="send-button" id="expandMacro">Expand</button>
+            </footer>
+          </div>
+
+          <div id="splitMode" class="workspace-mode split-view" style="display:none;">
+            <div class="split-left">
+              <section class="provider-head">
+                <div class="provider-title">
+                  <span class="service-icon claude">AI</span>
+                  <h2>Claude</h2>
+                  <button class="plain-button">⌄</button>
+                  <select aria-label="Model">
+                    <option>Claude 3.5 Sonnet</option>
+                    <option>Claude Opus</option>
+                    <option>Claude Haiku</option>
+                  </select>
+                </div>
+              </section>
+              <section class="chat-shell">
+                <p style="text-align:center; color: var(--muted); padding: 2rem;">Zone chat (gauche)</p>
+              </section>
+            </div>
+            <div class="split-divider"></div>
+            <div class="split-right">
+              <header class="terminal-tabs">
+                <button class="terminal-tab active" style="--color: #16a365">Terminal 1 ×</button>
+                <button class="terminal-tab" style="--color: #1677ff">Terminal 2 ×</button>
+                <button class="terminal-tab add">+</button>
+              </header>
+              <div class="terminal-panel" id="terminalPanel">
+                <div class="terminal-content">
+                  <div class="terminal-output">
+                    <div>$ cd /Users/JOB/###DEV/_Prod/LLM_roxor</div>
+                    <div>$ npm start</div>
+                    <div style="color: var(--green);">✓ Electron app launched</div>
+                  </div>
+                  <input type="text" class="terminal-input" placeholder="$ " />
                 </div>
               </div>
-            </article>
-          </section>
-
-          <footer class="composer">
-            <button class="icon-button large" aria-label="Add context">+</button>
-            <button class="icon-button large" aria-label="Settings">☷</button>
-            <select aria-label="Active profile">
-              <option>Claude JOB / Strategie</option>
-              <option>Claude ImpactIA / Redaction</option>
-              <option>Claude Test / Critique</option>
-            </select>
-            <input id="composerInput" value="..d  #Projet  Peux-tu transformer cette reponse en plan actionnable ?" aria-label="Prompt input" />
-            <button class="send-button" id="expandMacro">Expand</button>
-          </footer>
+            </div>
+          </div>
         </section>
 
         <aside class="inspector">
@@ -321,6 +374,7 @@
         <div class="prefs-grid">
           <nav class="prefs-nav">
             <button type="button" class="active">Workspace</button>
+            <button type="button">LLMs</button>
             <button type="button">Heritage</button>
             <button type="button">Skills</button>
             <button type="button">Macros</button>
@@ -377,7 +431,65 @@
                 </tbody>
               </table>
             </div>
+
+            <div class="setting-card llm-config" id="llmConfigPanel" style="display:none;">
+              <h3>Configuration LLMs</h3>
+              <p>Cliquez sur un LLM avec le bouton droit pour configurer son URL API.</p>
+              <div class="llm-list" id="llmListConfig">
+                <div class="llm-item">
+                  <label>Claude <span class="badge-muted">https://api.anthropic.com</span></label>
+                  <div class="url-input">
+                    <input type="text" placeholder="URL API" value="https://api.anthropic.com" />
+                    <button type="button" class="secondary small">Tester</button>
+                  </div>
+                </div>
+                <div class="llm-item">
+                  <label>ChatGPT <span class="badge-muted">https://api.openai.com</span></label>
+                  <div class="url-input">
+                    <input type="text" placeholder="URL API" value="https://api.openai.com" />
+                    <button type="button" class="secondary small">Tester</button>
+                  </div>
+                </div>
+              </div>
+              <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--line);">
+                <h4>Ajouter un LLM custom</h4>
+                <input type="text" placeholder="Nom du LLM" id="customLlmName" />
+                <input type="text" placeholder="https://api.example.com" id="customLlmUrl" />
+                <button type="button" class="secondary" id="addCustomLlm">Ajouter</button>
+              </div>
+            </div>
           </section>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog class="prefs config-llm" id="configLlmDialog">
+      <form method="dialog">
+        <header>
+          <h2>Configurer LLM</h2>
+          <button class="icon-button" value="cancel" aria-label="Close">×</button>
+        </header>
+        <div class="config-content">
+          <label>
+            Nom du LLM
+            <input type="text" id="configLlmName" readonly />
+          </label>
+          <label>
+            URL API
+            <input type="text" id="configLlmUrl" placeholder="https://api.example.com" />
+          </label>
+          <label>
+            Clé API (optionnel)
+            <input type="password" id="configLlmKey" placeholder="Votre clé API" />
+          </label>
+          <label class="check">
+            <input type="checkbox" id="configLlmEnabled" checked />
+            Actif
+          </label>
+          <div class="dialog-actions">
+            <button type="button" class="secondary" value="cancel">Annuler</button>
+            <button type="submit" class="primary">Enregistrer</button>
+          </div>
         </div>
       </form>
     </dialog>

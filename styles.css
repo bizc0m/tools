@@ -976,40 +976,232 @@ td:first-child {
   }
 }
 
-@media print {
-  body {
-    background: #fff;
-  }
+.empty-state {
+  padding: 14px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+}
 
-  .desktop {
-    padding: 0;
-    display: block;
-  }
+.terminal-tabs {
+  height: 48px;
+  padding: 0 12px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  background: #f7f9fb;
+  overflow-x: auto;
+}
 
-  .app-window {
-    width: 100%;
-    height: auto;
-    min-height: 0;
-    display: block;
-    border: 0;
-    box-shadow: none;
-  }
+.terminal-tab {
+  height: 34px;
+  min-width: 120px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  font-weight: 600;
+  font-size: 13px;
+  color: #344054;
+  position: relative;
+  border-left: 4px solid var(--color);
+}
 
-  .sidebar,
-  .tabs,
-  .provider-head,
-  .composer,
-  .inspector {
-    display: none;
-  }
+.terminal-tab.active {
+  background: #fff;
+  border-color: var(--color);
+  color: #151b22;
+}
 
-  .workspace {
-    display: block;
-  }
+.terminal-tab.add {
+  border-left: 0;
+  justify-content: center;
+  min-width: auto;
+}
 
-  .chat-shell {
-    padding: 24px;
-    overflow: visible;
-    background: #fff;
-  }
+.terminal-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #1a1a1a;
+  overflow: hidden;
+}
+
+.terminal-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.terminal-output {
+  flex: 1;
+  overflow: auto;
+  padding: 16px;
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #e0e0e0;
+}
+
+.terminal-output div {
+  margin: 0;
+}
+
+.terminal-input {
+  border: 0 !important;
+  border-top: 1px solid #333 !important;
+  background: #2a2a2a !important;
+  color: #e0e0e0 !important;
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  padding: 12px 16px !important;
+  height: 40px !important;
+}
+
+.workspace-mode {
+  display: none;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+}
+
+.workspace-mode.active {
+  display: flex;
+}
+
+.split-view {
+  display: flex !important;
+  flex-direction: row;
+}
+
+.split-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border-right: 1px solid var(--line);
+}
+
+.split-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.split-divider {
+  width: 1px;
+  background: var(--line);
+  cursor: col-resize;
+}
+
+.split-divider:hover {
+  background: var(--blue);
+}
+
+.config-llm {
+  width: min(600px, calc(100vw - 56px));
+}
+
+.config-content {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.config-content label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  color: #344054;
+  font-weight: 650;
+}
+
+.config-content input,
+.config-content select {
+  width: 100%;
+}
+
+.dialog-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
+.dialog-actions button {
+  padding: 0 16px;
+}
+
+.llm-config {
+  display: none;
+}
+
+.llm-config.active {
+  display: block;
+}
+
+.llm-list {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.llm-item {
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #f7f9fb;
+}
+
+.llm-item label {
+  margin: 0;
+  font-weight: 650;
+  color: #151b22;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.badge-muted {
+  font-weight: 400;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.url-input {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.url-input input {
+  flex: 1;
+  font-size: 13px;
+}
+
+.url-input button.small {
+  padding: 0 12px;
+  height: 34px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.mini-icon.terminal {
+  color: var(--teal);
+}
+
+.mini-icon.terminal::before {
+  content: "";
+  width: 10px;
+  height: 8px;
+  background: currentColor;
+  border-radius: 1px;
+  position: relative;
 }

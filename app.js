@@ -212,6 +212,176 @@ document.querySelectorAll(".prefs-nav button").forEach((tab) => {
   tab.addEventListener("click", () => {
     document.querySelectorAll(".prefs-nav button").forEach((item) => item.classList.remove("active"));
     tab.classList.add("active");
-    showToast(`Preferences: ${tab.textContent.trim()}`);
+
+    const label = tab.textContent.trim();
+    document.querySelectorAll(".setting-card").forEach((card) => {
+      card.style.display = "none";
+    });
+
+    if (label === "LLMs") {
+      const llmConfig = document.querySelector(".llm-config");
+      if (llmConfig) {
+        llmConfig.style.display = "block";
+      }
+    }
+
+    showToast(`Preferences: ${label}`);
   });
+});
+
+// Split View Mode
+const chatMode = document.querySelector("#chatMode");
+const splitMode = document.querySelector("#splitMode");
+const splitTab = document.querySelector(".tab.split-mode");
+
+splitTab?.addEventListener("click", () => {
+  document.querySelectorAll(".tab").forEach((item) => item.classList.remove("active"));
+  splitTab.classList.add("active");
+  chatMode.classList.remove("active");
+  splitMode.classList.add("active");
+  showToast("Mode Split activé - Chat et Terminal côte à côte");
+});
+
+document.querySelectorAll(".tab[data-mode='chat']").forEach((tab) => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll(".tab").forEach((item) => item.classList.remove("active"));
+    tab.classList.add("active");
+    chatMode.classList.add("active");
+    splitMode.classList.remove("active");
+    const service = tab.textContent.replace("×", "").trim();
+    if (providerName) providerName.textContent = service;
+    if (answerTitle) answerTitle.textContent = service;
+    showToast(`${service} actif`);
+  });
+});
+
+// Terminal Management
+let terminalCount = 0;
+const maxTerminals = 4;
+const terminalsContainer = document.querySelector("#terminalsContainer");
+const terminalTabs = document.querySelector(".terminal-tabs");
+const addTerminalBtn = terminalTabs?.querySelector(".terminal-tab.add");
+const terminalColorMap = {
+  0: { color: "#16a365", name: "Terminal 1" },
+  1: { color: "#1677ff", name: "Terminal 2" },
+  2: { color: "#ff8a1f", name: "Terminal 3" },
+  3: { color: "#7c3aed", name: "Terminal 4" }
+};
+
+function createTerminalTab(index) {
+  const color = terminalColorMap[index].color;
+  const name = terminalColorMap[index].name;
+  const tab = document.createElement("button");
+  tab.className = "terminal-tab";
+  tab.style.setProperty("--color", color);
+  tab.textContent = `${name} ×`;
+  tab.setAttribute("data-terminal", index);
+
+  if (index === 0) tab.classList.add("active");
+
+  tab.addEventListener("click", () => {
+    document.querySelectorAll(".terminal-tab").forEach((t) => t.classList.remove("active"));
+    tab.classList.add("active");
+    showToast(`${name} actif`);
+  });
+
+  const closeBtn = tab;
+  closeBtn.addEventListener("contextmenu", (e) => {
+    e.preventDefault();
+    if (confirm(`Fermer ${name} ?`)) {
+      removeTerminal(index);
+    }
+  });
+
+  terminalTabs.insertBefore(tab, addTerminalBtn);
+}
+
+function createTerminalRow(index) {
+  const color = terminalColorMap[index].color;
+  const name = terminalColorMap[index].name;
+  const row = document.createElement("button");
+  row.className = "tree-row child";
+  row.style.setProperty("--color", color);
+  row.innerHTML = `
+    <span style="display:inline-block; width: 6px; height: 6px; border-radius: 50%; background: ${color}; margin-right: 6px;"></span>
+    <span class="row-label">${name}</span>
+    <span class="badge pale">1</span>
+  `;
+  row.setAttribute("data-terminal", index);
+  terminalsContainer.appendChild(row);
+}
+
+function addTerminal() {
+  if (terminalCount >= maxTerminals) {
+    showToast(`Limite atteinte: ${maxTerminals} terminaux max`);
+    return;
+  }
+
+  createTerminalTab(terminalCount);
+  createTerminalRow(terminalCount);
+
+  const emptyState = terminalsContainer.querySelector(".empty-state");
+  if (emptyState) emptyState.remove();
+
+  const badge = document.querySelector(".tree-row.root[data-service='Terminaux'] .badge");
+  if (badge) badge.textContent = terminalCount + 1;
+
+  terminalCount++;
+  showToast(`Terminal ${terminalColorMap[terminalCount - 1].name} ajouté`);
+}
+
+function removeTerminal(index) {
+  const tab = document.querySelector(`.terminal-tab[data-terminal="${index}"]`);
+  const row = document.querySelector(`.tree-row[data-terminal="${index}"]`);
+
+  tab?.remove();
+  row?.remove();
+
+  terminalCount--;
+
+  const badge = document.querySelector(".tree-row.root[data-service='Terminaux'] .badge");
+  if (badge) badge.textContent = terminalCount;
+
+  if (terminalCount === 0) {
+    terminalsContainer.innerHTML = '<div class="empty-state">Cliquez sur + pour ajouter un terminal (max 4)</div>';
+  }
+
+  const firstTab = document.querySelector(".terminal-tab:not(.add)");
+  if (firstTab) {
+    firstTab.classList.add("active");
+  }
+
+  showToast(`Terminal ${terminalColorMap[index].name} supprimé`);
+}
+
+addTerminalBtn?.addEventListener("click", addTerminal);
+
+// LLM Right-Click Config
+const configLlmDialog = document.querySelector("#configLlmDialog");
+const configLlmName = document.querySelector("#configLlmName");
+const configLlmUrl = document.querySelector("#configLlmUrl");
+const configLlmKey = document.querySelector("#configLlmKey");
+const configLlmEnabled = document.querySelector("#configLlmEnabled");
+
+document.querySelectorAll(".tree-row.root[data-service]").forEach((row) => {
+  if (!["Terminaux"].includes(row.dataset.service)) {
+    row.addEventListener("contextmenu", (e) => {
+      e.preventDefault();
+      const service = row.dataset.service;
+      if (configLlmDialog) {
+        configLlmName.value = service;
+        configLlmUrl.value = `https://api.${service.toLowerCase()}.com`;
+        configLlmDialog.showModal?.();
+        showToast(`Configuration: ${service}`);
+      }
+    });
+  }
+});
+
+configLlmDialog?.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const name = configLlmName.value;
+  const url = configLlmUrl.value;
+  showToast(`${name} configuré: ${url}`);
+  configLlmDialog.close();
 });
