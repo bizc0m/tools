@@ -1,219 +1,114 @@
-// LLM-ROX App - Real WebView and Terminal Implementation
+/**
+ * LLM-ROX Renderer Process
+ *
+ * Cette version est MINIMALISTE - on teste CHAQUE feature une par une
+ * Feature 1: Cliquer sur une app dans la sidebar change le tab actif
+ */
 
-const llmConfig = await window.llmRoxWindow.llm.getConfig();
-let currentLlm = "claude";
-let terminals = {};
-let terminalCount = 0;
+console.log('✅ app.js loaded at', new Date().toLocaleTimeString());
 
-// DOM Elements
-const chatMode = document.querySelector("#chatMode");
-const llmWebView = document.querySelector("#llmWebView");
-const tabs = document.querySelectorAll(".tab");
-const splitTab = document.querySelector(".tab.split-mode");
-const toast = document.querySelector("#toast");
-
-function showToast(message) {
-  if (!toast) return;
-  toast.textContent = message;
-  toast.classList.add("show");
-  window.clearTimeout(showToast.timeout);
-  showToast.timeout = window.setTimeout(() => {
-    toast.classList.remove("show");
-  }, 2200);
+// Wait for DOM to be ready
+if (document.readyState === 'loading') {
+  console.log('⏳ DOM still loading, waiting...');
+  document.addEventListener('DOMContentLoaded', initFeature1);
+} else {
+  console.log('✅ DOM ready immediately');
+  initFeature1();
 }
 
-// Create WebView for LLM
-function createLLMWebView(llmKey) {
-  if (!llmWebView) return;
+function initFeature1() {
+  console.log('🚀 Initializing Feature 1...');
 
-  // Clear existing webviews
-  llmWebView.innerHTML = "";
+  // ============================================
+  // FEATURE 1: Click on sidebar app
+  // ============================================
+  const appItems = document.querySelectorAll('.app');
+  console.log(`Found ${appItems.length} app items in sidebar`);
 
-  const url = llmConfig[llmKey]?.url;
-  if (!url) {
-    llmWebView.innerHTML = `<div style="padding: 20px; color: #666;">LLM not configured: ${llmKey}</div>`;
+  if (appItems.length === 0) {
+    console.error('❌ ERROR: No .app elements found!');
+    console.log('HTML body:', document.body.innerHTML.substring(0, 500));
     return;
   }
 
-  const webview = document.createElement("webview");
-  webview.src = url;
-  webview.style.width = "100%";
-  webview.style.height = "100%";
-  webview.style.border = "none";
+  appItems.forEach((appItem, index) => {
+    const appKey = appItem.dataset.app;
+    console.log(`  [${index}] App: ${appKey}`);
 
-  llmWebView.appendChild(webview);
-  currentLlm = llmKey;
+    appItem.addEventListener('click', (e) => {
+      e.stopPropagation();
+      console.log(`🔷 CLICK EVENT: ${appKey}`);
 
-  console.log(`Loaded WebView for ${llmKey}: ${url}`);
-}
+      // Remove active class from all apps
+      appItems.forEach(item => {
+        const hadActive = item.classList.contains('active');
+        item.classList.remove('active');
+        if (hadActive) console.log(`  - Removed active from ${item.dataset.app}`);
+      });
 
-// Handle Tab Clicks
-tabs.forEach((tab) => {
-  tab.addEventListener("click", () => {
-    if (tab.classList.contains("add")) {
-      showToast("Nouvel onglet a connecter");
-      return;
-    }
+      // Add active class to clicked app
+      appItem.classList.add('active');
+      console.log(`  ✅ Added active to ${appKey}`);
+      console.log(`  Current classes: ${appItem.className}`);
 
-    if (tab.classList.contains("split-mode")) {
-      return; // Handle separately
-    }
+      // Update active tab
+      const tabs = document.querySelectorAll('.tab');
+      tabs.forEach(tab => tab.classList.remove('active'));
 
-    // Remove active from all tabs
-    tabs.forEach((t) => t.classList.remove("active"));
-    tab.classList.add("active");
+      // Find or create tab for this app
+      let activeTab = document.querySelector(`.tab[data-app="${appKey}"]`);
+      if (activeTab) {
+        activeTab.classList.add('active');
+        console.log(`✅ Activated existing tab for ${appKey}`);
+      } else {
+        // FEATURE 2: Create a new tab
+        console.log(`🎯 Feature 2: Creating new tab for ${appKey}`);
 
-    const llmKey = tab.dataset.llmKey || tab.textContent.toLowerCase().split(" ")[0];
+        // Get app label from the sidebar item
+        const appLabel = appItem.querySelector('.label').textContent;
+        const appIcon = appItem.querySelector('.icon').textContent;
 
-    // Show webview container
-    if (llmWebView) {
-      llmWebView.style.display = "block";
-    }
+        // Create new tab element
+        const newTab = document.createElement('button');
+        newTab.className = 'tab active';
+        newTab.dataset.app = appKey;
+        newTab.innerHTML = `
+          <span class="icon">${appIcon}</span>
+          ${appLabel}
+          <button class="btn-close">×</button>
+        `;
 
-    createLLMWebView(llmKey);
-    showToast(`${llmConfig[llmKey]?.name || llmKey} ouvert`);
-  });
-});
+        // Add close button handler
+        const closeBtn = newTab.querySelector('.btn-close');
+        closeBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          console.log(`🗑️ Closing tab: ${appKey}`);
+          newTab.remove();
+          // TODO: Feature 3 - Switch to previous tab or Claude
+        });
 
-// Terminal Management
-const maxTerminals = 4;
-const terminalsContainer = document.querySelector("#terminalsContainer");
-const terminalTabs = document.querySelector(".terminal-tabs");
+        // Click handler for tab
+        newTab.addEventListener('click', (e) => {
+          if (!e.target.classList.contains('btn-close')) {
+            console.log(`📌 Tab click: switching to ${appKey}`);
+            // Remove active from all tabs
+            const allTabs = document.querySelectorAll('.tab');
+            allTabs.forEach(t => t.classList.remove('active'));
+            newTab.classList.add('active');
+            // TODO: Feature 2b - Switch webview to this app's URL
+          }
+        });
 
-async function createTerminal(index) {
-  if (terminalCount >= maxTerminals) {
-    showToast(`Limite atteinte: ${maxTerminals} terminaux max`);
-    return;
-  }
+        // Insert the new tab before the add button
+        const tabsContainer = document.querySelector('.tabs');
+        const addTabBtn = document.querySelector('.btn-add-tab');
+        tabsContainer.insertBefore(newTab, addTabBtn);
 
-  const terminalId = `terminal-${Date.now()}`;
-
-  // Create terminal tab
-  if (terminalTabs) {
-    const tab = document.createElement("button");
-    tab.className = "terminal-tab";
-    tab.textContent = `Terminal ${index + 1} ×`;
-    tab.style.setProperty("--color", ["#16a365", "#1677ff", "#ff8a1f", "#7c3aed"][index]);
-    tab.setAttribute("data-terminal", terminalId);
-
-    if (index === 0) tab.classList.add("active");
-
-    const addBtn = terminalTabs.querySelector(".terminal-tab.add");
-    if (addBtn) {
-      terminalTabs.insertBefore(tab, addBtn);
-    }
-
-    tab.addEventListener("click", () => {
-      document.querySelectorAll(".terminal-tab").forEach((t) => t.classList.remove("active"));
-      tab.classList.add("active");
-      showToast(`Terminal ${index + 1} actif`);
-    });
-  }
-
-  // Create terminal row in sidebar
-  if (terminalsContainer) {
-    const row = document.createElement("button");
-    row.className = "tree-row child";
-    row.style.setProperty("--color", ["#16a365", "#1677ff", "#ff8a1f", "#7c3aed"][index]);
-    row.innerHTML = `
-      <span style="display:inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--color); margin-right: 6px;"></span>
-      <span class="row-label">Terminal ${index + 1}</span>
-      <span class="badge pale">1</span>
-    `;
-    row.setAttribute("data-terminal", terminalId);
-    terminalsContainer.appendChild(row);
-
-    // Remove empty state
-    const emptyState = terminalsContainer.querySelector(".empty-state");
-    if (emptyState) emptyState.remove();
-  }
-
-  // Initialize terminal in backend
-  const result = await window.llmRoxWindow.terminal.create(terminalId);
-  if (result.success) {
-    terminals[terminalId] = {
-      index,
-      active: true
-    };
-
-    terminalCount++;
-
-    // Update badge
-    const badge = document.querySelector(".tree-row.root[data-service='Terminaux'] .badge");
-    if (badge) badge.textContent = terminalCount;
-
-    showToast(`Terminal ${index + 1} créé`);
-  }
-}
-
-// Terminal output handler
-window.llmRoxWindow.terminal.onOutput((data) => {
-  console.log("Terminal output:", data);
-  const terminalPanel = document.querySelector(".terminal-output");
-  if (terminalPanel) {
-    const line = document.createElement("div");
-    line.textContent = data.data;
-    if (data.error) line.style.color = "#ff6b6b";
-    terminalPanel.appendChild(line);
-    terminalPanel.parentElement.scrollTop = terminalPanel.parentElement.scrollHeight;
-  }
-});
-
-// Terminal input handler
-const terminalInput = document.querySelector(".terminal-input");
-if (terminalInput) {
-  terminalInput.addEventListener("keypress", async (e) => {
-    if (e.key === "Enter") {
-      const command = e.target.value;
-      const activeTab = document.querySelector(".terminal-tab.active");
-      const terminalId = activeTab?.getAttribute("data-terminal");
-
-      if (terminalId && terminals[terminalId]) {
-        await window.llmRoxWindow.terminal.execute(terminalId, command);
-        e.target.value = "";
+        console.log(`✅ Created new tab for ${appKey}`);
       }
-    }
+    });
   });
+
+  console.log('✅ Feature 1 ready: Sidebar app clicks');
 }
 
-// Add terminal button
-const addTerminalBtn = terminalTabs?.querySelector(".terminal-tab.add");
-if (addTerminalBtn) {
-  addTerminalBtn.addEventListener("click", () => {
-    createTerminal(terminalCount);
-  });
-}
-
-// Also handle dynamic button clicks
-document.addEventListener("click", (e) => {
-  if (e.target.closest(".terminal-tab.add")) {
-    createTerminal(terminalCount);
-  }
-});
-
-// Window controls
-document.querySelector(".dot.red")?.addEventListener("click", () => {
-  window.llmRoxWindow?.close();
-});
-
-document.querySelector(".dot.yellow")?.addEventListener("click", () => {
-  window.llmRoxWindow?.minimize();
-});
-
-document.querySelector(".dot.green")?.addEventListener("click", () => {
-  window.llmRoxWindow?.maximize();
-});
-
-// Initialize with Claude
-createLLMWebView("claude");
-showToast("Claude WebView loaded");
-
-// Expose API for terminal testing
-window.testTerminal = async (command) => {
-  const terminalId = Object.keys(terminals)[0];
-  if (terminalId) {
-    return await window.llmRoxWindow.terminal.execute(terminalId, command);
-  }
-};
-
-console.log("LLM-ROX initialized - WebViews and Terminals ready");
