@@ -1205,3 +1205,13 @@ td:first-child {
   border-radius: 1px;
   position: relative;
 }
+
+.webview-container {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+webview {
+  background: #fff;
+}
