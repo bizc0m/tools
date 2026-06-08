@@ -17,7 +17,32 @@ if (document.readyState === 'loading') {
 }
 
 function initFeature1() {
-  console.log('🚀 Initializing Feature 1...');
+  console.log('🚀 Initializing Feature 1 & 2...');
+
+  // APP URL MAPPING (Feature 2b)
+  const appUrls = {
+    claude: 'https://claude.ai',
+    chatgpt: 'https://chat.openai.com',
+    gemini: 'https://gemini.google.com',
+    perplexity: 'https://www.perplexity.ai'
+  };
+
+  // Helper function to change webview URL
+  function loadAppUrl(appKey) {
+    console.log(`📺 Feature 2b: Loading URL for ${appKey}`);
+    const webview = document.querySelector('webview#webview-container');
+    if (webview) {
+      const url = appUrls[appKey];
+      if (url) {
+        webview.src = url;
+        console.log(`  ✅ Webview URL changed to: ${url}`);
+      } else {
+        console.warn(`  ⚠️ No URL mapping for ${appKey}`);
+      }
+    } else {
+      console.error('  ❌ Webview container not found!');
+    }
+  }
 
   // ============================================
   // FEATURE 1: Click on sidebar app
@@ -31,9 +56,76 @@ function initFeature1() {
     return;
   }
 
+  // FEATURE 4: Context Menu Handler
+  function showContextMenu(appKey, appItem, event) {
+    event.preventDefault();
+    console.log(`📋 Feature 4: Context menu for ${appKey}`);
+
+    const contextMenu = document.getElementById('contextMenu');
+    contextMenu.style.left = event.clientX + 'px';
+    contextMenu.style.top = event.clientY + 'px';
+    contextMenu.classList.add('visible');
+
+    // Close menu when clicking outside
+    const closeMenu = () => {
+      contextMenu.classList.remove('visible');
+      document.removeEventListener('click', closeMenu);
+    };
+    setTimeout(() => {
+      document.addEventListener('click', closeMenu);
+    }, 0);
+
+    // Menu actions
+    const renameBtn = contextMenu.querySelector('[data-action="rename"]');
+    const favoriteBtn = contextMenu.querySelector('[data-action="favorite"]');
+    const muteBtn = contextMenu.querySelector('[data-action="mute"]');
+    const removeBtn = contextMenu.querySelector('[data-action="remove"]');
+
+    renameBtn.onclick = () => {
+      console.log(`  📝 Rename: ${appKey}`);
+      const newName = prompt(`Rename ${appKey}:`, appKey);
+      if (newName) {
+        appItem.querySelector('.label').textContent = newName;
+        console.log(`  ✅ Renamed to: ${newName}`);
+      }
+      closeMenu();
+    };
+
+    favoriteBtn.onclick = () => {
+      console.log(`  ⭐ Toggle favorite: ${appKey}`);
+      appItem.classList.toggle('favorite');
+      console.log(`  ✅ Favorite toggled`);
+      closeMenu();
+    };
+
+    muteBtn.onclick = () => {
+      console.log(`  🔇 Toggle mute: ${appKey}`);
+      appItem.classList.toggle('muted');
+      console.log(`  ✅ Mute toggled`);
+      closeMenu();
+    };
+
+    removeBtn.onclick = () => {
+      console.log(`  🗑️ Remove app: ${appKey}`);
+      if (confirm(`Remove ${appKey} from sidebar?`)) {
+        appItem.remove();
+        // Also remove associated tabs
+        const appTabs = document.querySelectorAll(`.tab[data-app="${appKey}"]`);
+        appTabs.forEach(t => t.remove());
+        console.log(`  ✅ App removed`);
+      }
+      closeMenu();
+    };
+  }
+
   appItems.forEach((appItem, index) => {
     const appKey = appItem.dataset.app;
     console.log(`  [${index}] App: ${appKey}`);
+
+    // FEATURE 4: Right-click context menu
+    appItem.addEventListener('contextmenu', (e) => {
+      showContextMenu(appKey, appItem, e);
+    });
 
     appItem.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -50,6 +142,9 @@ function initFeature1() {
       appItem.classList.add('active');
       console.log(`  ✅ Added active to ${appKey}`);
       console.log(`  Current classes: ${appItem.className}`);
+
+      // FEATURE 2b: Load the app's URL
+      loadAppUrl(appKey);
 
       // Update active tab
       const tabs = document.querySelectorAll('.tab');
@@ -84,7 +179,25 @@ function initFeature1() {
           e.stopPropagation();
           console.log(`🗑️ Closing tab: ${appKey}`);
           newTab.remove();
-          // TODO: Feature 3 - Switch to previous tab or Claude
+
+          // FEATURE 3: Fallback when closing tabs
+          console.log(`📌 Feature 3: Tab closed, checking fallback...`);
+          const remainingTabs = document.querySelectorAll('.tab');
+          console.log(`  Remaining tabs: ${remainingTabs.length}`);
+
+          if (remainingTabs.length === 0) {
+            console.log(`  ⚠️ No tabs left! Fallback to Claude`);
+            // Switch back to Claude
+            const claudeApp = document.querySelector('.app[data-app="claude"]');
+            if (claudeApp) {
+              claudeApp.click();
+            }
+          } else if (!document.querySelector('.tab.active')) {
+            // If no tab is active, activate the last one
+            console.log(`  📌 Activating last remaining tab`);
+            const lastTab = remainingTabs[remainingTabs.length - 1];
+            lastTab.click();
+          }
         });
 
         // Click handler for tab
@@ -95,7 +208,8 @@ function initFeature1() {
             const allTabs = document.querySelectorAll('.tab');
             allTabs.forEach(t => t.classList.remove('active'));
             newTab.classList.add('active');
-            // TODO: Feature 2b - Switch webview to this app's URL
+            // FEATURE 2b: Switch webview to this app's URL
+            loadAppUrl(appKey);
           }
         });
 
