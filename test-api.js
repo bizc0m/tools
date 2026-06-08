@@ -191,6 +191,10 @@ async function runTests() {
 
   await test('Save and load user', async () => {
     const user1 = authManager.currentUser;
+    if (typeof localStorage === 'undefined') {
+      console.log('  ℹ️ Skipping: localStorage not available in Node.js');
+      return;
+    }
     const auth2 = new AuthManager(API_URL);
     auth2.loadUser();
     const user2 = auth2.currentUser;

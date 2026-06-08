@@ -78,11 +78,11 @@ const server = http.createServer((req, res) => {
     getSkills(res, query);
   } else if (pathname === '/api/skills' && req.method === 'POST') {
     postSkill(req, res);
+  } else if (pathname === '/api/skills/search' && req.method === 'GET') {
+    searchSkills(res, query);
   } else if (pathname.match(/^\/api\/skills\/[^/]+$/) && req.method === 'GET') {
     const skillId = pathname.split('/')[3];
     getSkillById(res, skillId);
-  } else if (pathname === '/api/skills/search' && req.method === 'GET') {
-    searchSkills(res, query);
   } else if (pathname === '/api/submissions' && req.method === 'POST') {
     submitSkill(req, res);
   } else if (pathname === '/api/submissions' && req.method === 'GET') {
