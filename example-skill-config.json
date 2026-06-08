@@ -1,0 +1,67 @@
+{
+  "id": "notion",
+  "name": "Notion",
+  "icon": "📝",
+  "url": "https://notion.so",
+  "group": "Productivity",
+  "category": "Productivity",
+  "description": "All-in-one workspace for notes, databases, wikis, and more with real-time collaboration",
+  "tags": ["productivity", "notes", "database", "wiki", "collaboration", "knowledge-base"],
+  "author": "Notion Labs",
+  "version": "2.1.0",
+  "repository": "https://github.com/user/llm-rox-skill-notion",
+  "homepage": "https://notion.so",
+  "license": "MIT",
+  "documentation": "https://docs.notion.so",
+  "support": "support@notion.so",
+  "features": [
+    "📝 Real-time note taking with formatting",
+    "🗄️ Powerful database with filtering & sorting",
+    "🔗 Wiki-style linking between pages",
+    "👥 Team collaboration with comments",
+    "🔄 Sync across all devices",
+    "🧩 Integrations with 1000+ apps",
+    "📊 Templates & dashboards",
+    "🔐 Enterprise security"
+  ],
+  "screenshots": [
+    "https://notion.so/images/notion-1.png",
+    "https://notion.so/images/notion-2.png",
+    "https://notion.so/images/notion-3.png"
+  ],
+  "dependencies": [],
+  "keywords": [
+    "note-taking",
+    "project-management",
+    "database",
+    "knowledge-management",
+    "collaboration",
+    "productivity",
+    "wiki",
+    "kanban"
+  ],
+  "createdAt": "2025-01-15T10:00:00Z",
+  "updatedAt": "2026-06-08T12:00:00Z",
+  "downloadUrl": "https://github.com/user/llm-rox-skill-notion",
+  "metrics": {
+    "downloads": 1250,
+    "stars": 89,
+    "forks": 12,
+    "rating": 4.8,
+    "reviews": 34,
+    "lastActivityDays": 5
+  },
+  "permissions": [
+    "notifications",
+    "database-access",
+    "sync-data"
+  ],
+  "installationInstructions": "Click 'Install' to add Notion to your LLM-ROX instance",
+  "uninstallationInstructions": "Right-click app → Remove",
+  "changelog": {
+    "2.1.0": "Added real-time collaboration features",
+    "2.0.0": "Complete redesign with new UI",
+    "1.5.0": "Database filtering improvements",
+    "1.0.0": "Initial release"
+  }
+}
